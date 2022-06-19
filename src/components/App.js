@@ -3,20 +3,36 @@ import Nav from "./Nav";
 import CardContainer from "./CardContainer/CardContainer";
 
 import hogs from "../porkers_data";
-console.log(hogs)
+import NewPigForm from "./NewPigForm/NewPigForm";
 
 function App() {
-	/* STATE HOGDATA */
-	const [hogData, setHogData] = useState(hogs);
+  const [showGreased, setShowGreased] = useState(false);
+  const [sortBy, setSortBy] = useState("");
+  const [hogData, setHogData] = useState(hogs)
+  
 
-	const [] = useState();
+  function handleSetShowGreased() {
+    setShowGreased(!showGreased);
+  }
 
-	return (
-		<div className="App">
-			<Nav />
-			<CardContainer hogData={hogData} />
-		</div>
-	);
+  function handleSetSort(e) {
+    setSortBy(e.target.textContent);
+  }
+
+  function handleFormSubmit(){
+
+  }
+
+  return (
+    <div className="App">
+      <Nav
+        handleSetShowGreased={handleSetShowGreased}
+        handleSetSort={handleSetSort}
+      />
+	  <NewPigForm handleFormSubmit={handleFormSubmit}/>
+      <CardContainer showGreased={showGreased} hogData={hogData} sortBy={sortBy}/>
+    </div>
+  );
 }
 
 export default App;
